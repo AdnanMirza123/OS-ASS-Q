@@ -2,14 +2,148 @@
 #include < sys/types.h>
 #include <unistd.h>
 
+#include <stdlib.h>
+
+#include <sys/wait.h>
+
 int main(){
-  int a[1000];
-  int k = 1;
-  for(int i =0 ; i < 1000 ; i++){
-   for( int j=1 ; j<100 ; j++){
-       printf("Sum " k);
-    }
-    k++;
-  }
-    printf("Exit");
-  }
+	
+	int v1=0,v2=0,v3=0,v4=0,v5=0,v6=0,v7=0,v8=0,v9=0,v10=0,Sum=0;
+	int a[1000],b1[2],b2[2],b3[2],b4[2],b5[2],b6[2],b7[2],b8[2],b9[2],b10[2];
+	int c1 = fork();
+	pipe(b1),pipe(b2),pipe(b3),pipe(b4),pipe(b5),pipe(b6),pipe(b7),pipe(b8),pipe(b9),pipe(b10);
+	for(int i=0; i<1000; i++)
+		a[i]=i;
+	if(c1 == 0){
+		for(int i=0; i<100; i++)
+			v1 = v1 + a[i];
+		write(b1[1],&v1,sizeof(v1));
+		close(b1[1]);
+		exit(0);
+	}
+	else{
+		wait(NULL);
+		int c2 = fork();
+		if(c2 == 0){
+			for(int i=100; i<200; i++)
+				v2 = v2 + a[i];
+			write(b2[1],&v2,sizeof(v2));
+			close(b2[1]);
+			exit(0);
+		}
+		else{
+			wait(NULL);
+			int c3 = fork();
+			if(c3 == 0){
+				for(int i=200; i<300; i++)
+					v3 = v3 + a[i];
+				write(b3[1],&v3,sizeof(v3));
+				close(b3[1]);
+				exit(0);
+			}
+			else{
+				wait(NULL);
+				int c4 = fork();
+				if(c4 == 0){
+					for(int i=300; i<400; i++)
+						v4 = v4 + a[i];
+					write(b4[1],&v4,sizeof(v4));
+					close(b4[1]);
+					exit(0);
+				}
+				else{
+					wait(NULL);
+					int c5 = fork();
+					if(c5 == 0){
+						for(int i=400; i<500; i++)
+							v5 = v5 + a[i];
+						write(b5[1],&v5,sizeof(v5));
+						close(b5[1]);
+						exit(0);
+					}
+					else{
+						wait(NULL);
+						int c6 = fork();
+						if(c6 == 0){
+							for(int i=500; i<600; i++)
+								v6 = v6 + a[i];
+							write(b6[1],&v6,sizeof(v6));
+							close(b6[1]);
+							exit(0);
+						}
+						else{
+							wait(NULL);
+							int c7 = fork();
+							if(c7 == 0){
+								for(int i=600; i<700; i++)
+									v7 = v7 + a[i];
+								write(b7[1],&v7,sizeof(v7));
+								close(b7[1]);
+								exit(0);
+							}
+							else{
+								wait(NULL);
+								int c8 = fork();
+								if(c8 == 0){
+									for(int i=700; i<800; i++)
+										v8 = v8 + a[i];
+									write(b8[1],&v8,sizeof(v8));
+									close(b8[1]);
+									exit(0);
+								}
+								else{
+									wait(NULL);
+									int c9 = fork();
+									if(c9 == 0){
+										for(int i=800; i<900; i++)
+											v9 = v9 + a[i];
+										write(b9[1],&v9,sizeof(v9));
+										close(b9[1]);
+										exit(0);
+									}
+									else{
+										wait(NULL);
+										int c10 = fork();
+										if(c10 == 0){
+											for(int i=900; i<1000; i++)
+												v10 = v10 + a[i];
+											write(b10[1],&v10,sizeof(v10));
+											close(b10[1]);
+											exit(0);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	read(b1[0],&v1,sizeof(v1));
+	close(b1[0]);
+	read(b2[0],&v2,sizeof(v2));
+	close(b2[0]);
+	read(b3[0],&v3,sizeof(v3));
+	close(b3[0]);
+	read(b4[0],&v4,sizeof(v4));
+	close(b4[0]);
+	read(b5[0],&v5,sizeof(v5));
+	close(b5[0]);
+	read(b6[0],&v6,sizeof(v6));
+	close(b6[0]);
+	read(b7[0],&v7,sizeof(v7));
+	close(b7[0]);
+	read(b8[0],&v8,sizeof(v8));
+	close(b8[0]);
+	read(b9[0],&v9,sizeof(v9));
+	close(b9[0]);
+	read(b10[0],&v10,sizeof(v10));
+	close(b10[0]);
+	Sum = v1+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+	printf("Total Sum is: ");
+	printf("Sum %d" , Sum);
+}
+
+
+
